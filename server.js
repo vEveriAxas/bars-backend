@@ -11,8 +11,8 @@ const httpsOptions = {
     key: fs.readFileSync(path.resolve(__dirname, './certificate/privkey.pem')),
 };
 
-app.get('/', (req, res) => {
-    console.log(req.headers, req.ip);
+app.options('/', cors({ origin: "https://bars-dusky.vercel.app", }));
+app.get('/', cors({ origin: "https://bars-dusky.vercel.app", }), (req, res) => {
     res.send('Екатерина, Вас приветствует будущий сервер крупнейщей системы общения! Сайт работает на HTTPS протоколе и полностью безопасен!');
 });
 
