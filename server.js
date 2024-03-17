@@ -16,8 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(cors({
-    origin: ['http://localhost:8080', 'http://192.168.1.183:8080', 'https://bars-dusky.vercel.app/'],
-    allowedHeaders: '*',
+    origin: ['http://localhost:8080', 'http://192.168.1.183:8080', 'https://bars-dusky.vercel.app'],
     methods: ['POST', 'GET', 'PUT', 'DELETE'],
 }));
 
