@@ -12,7 +12,7 @@ const httpsOptions = {
 };
 
 app.get('/', (req, res) => {
-    res.send('Hello from Express over HTTPS!');
+    res.send('Екатерина, Вас приветствует будущий сервер крупнейщей системы общения! Сайт работает на HTTPS протоколе и полностью безопасен!');
 });
 
 app.use(cors({
