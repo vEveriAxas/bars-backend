@@ -12,7 +12,7 @@ const httpsOptions = {
 };
 
 app.get('/', (req, res) => {
-    console.log(req);
+    console.log(req.headers, req.ip);
     res.send('Екатерина, Вас приветствует будущий сервер крупнейщей системы общения! Сайт работает на HTTPS протоколе и полностью безопасен!');
 });
 
