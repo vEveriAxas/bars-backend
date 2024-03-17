@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const https = require('https');
 const app = express();
-const PORT = 3000;
+const PORT = 443;
 const cors = require('cors');
 
 const httpsOptions = {
@@ -11,7 +11,9 @@ const httpsOptions = {
     key: fs.readFileSync(path.resolve(__dirname, './certificate/privkey.pem')),
 };
 
-console.log(httpsOptions);
+app.get('/', (req, res) => {
+    res.send('Hello from Express over HTTPS!');
+});
 
 app.use(cors({
     origin: '*',
@@ -20,6 +22,7 @@ app.use(cors({
 }));
 
 
-app.listen(PORT, () => {
-    console.log(`Server is running at http://${'localhost'}:${PORT}`);
+
+https.createServer(httpsOptions, app).listen(443, () => {
+    console.log(`Server is running on port https:localhost:${PORT}`);
 });
