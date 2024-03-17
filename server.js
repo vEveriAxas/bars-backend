@@ -16,8 +16,13 @@ app.get('/', (req, res) => {
     res.send('Екатерина, Вас приветствует будущий сервер крупнейщей системы общения! Сайт работает на HTTPS протоколе и полностью безопасен!');
 });
 
+app.get('/hello', (req, res) => {
+    console.log(req.headers, req.ip);
+    res.send('Hello!!!');
+});
+
 app.use(cors({
-    origin: "*",
+    origin: "https://bars-dusky.vercel.app",
     methods: "*",
 }));
 
