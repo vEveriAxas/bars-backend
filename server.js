@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const IP_ADDRESS = '192.168.1.183';
 const cors = require('cors');
 
 app.use(cors({
@@ -15,5 +14,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, IP_ADDRESS, () => {
-    console.log(`Server is running at http://${IP_ADDRESS}:${PORT}`);
+    console.log(`Server is running at http://${'localhost'}:${PORT}`);
 });
