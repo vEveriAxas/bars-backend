@@ -1,10 +1,22 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const https = require('https');
 const app = express();
-const PORT = 443;
+const path = require('path');
+const https = require('https');
+const fs = require('fs');
+const http = require('http');
 const cors = require('cors');
+const { Server } = require('socket.io'); 
+const server = http.createServer(app);
+const PORT = 443;
+
+const io = new Server(server, {
+    cors: {
+        origin: "https://bars-dusky.vercel.app",
+        // origin: "http://localhost:8081",
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    }
+})
+
 
 // Получение сертификата и ключа SSL
 const httpsOptions = {
@@ -20,17 +32,22 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-    res.send('Екатерина, Вас приветствует будущий сервер крупнейщей системы общения! Сайт работает на HTTPS протоколе и полностью безопасен!');
+    res.send('Сервер запущен!');
+});
+io.on('connection', (socket) => {
+    console.log('A new client connect!');
+    socket.on('message', (content) => {
+        console.log(content);
+        io.emit('message', content)
+    });
 });
 
-app.get('/hello', (req, res) => {
-    console.log(req.headers, req.ip);
-    res.send('Hello!!!');
-});
+
+
 
 
 // Local
-// app.listen(3000, () => {
+// server.listen(3000, () => {
 //     console.log(`Server has been started on http//localhost:3000`);
 // });
 
