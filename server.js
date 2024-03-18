@@ -9,7 +9,7 @@ const { Server } = require('socket.io');
 const PORT = 443;
 
 // =====================================   STATE   ============================================
-const IS_PRODUCTION = false;
+const IS_PRODUCTION = true;
 
 // DATABASE
 const { sequelize } = require('./db_connection');
