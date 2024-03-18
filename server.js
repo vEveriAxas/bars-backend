@@ -7,9 +7,11 @@ const http = require('http');
 const cors = require('cors');
 const { Server } = require('socket.io');
 const PORT = 443;
+require('dotenv').config();
 
 // =====================================   STATE   ============================================
-const IS_PRODUCTION = true;
+const IS_PRODUCTION = process.env.IS_PRODUCTION;
+console.log(IS_PRODUCTION);
 
 // DATABASE
 const { sequelize } = require('./db_connection');
@@ -45,15 +47,15 @@ const httpsOptions = {
 };
 
 // =====================================   Запуск сервера   ============================================
-function startedServer(isProduction) {
-    if (isProduction === true) {
+function startedServer(IS_PRODUCTION) {
+    if (IS_PRODUCTION === 'true') {
         // Global  (HTTPS)
         const server = https.createServer(httpsOptions, app).listen(443, () => {
             console.log(`Server is running on port http:localhost:${PORT}`);
         });
         return server;
     }
-    else if (isProduction === false) {
+    else if (IS_PRODUCTION === 'false') {
         // local
         const server = http.createServer(app);
         server.listen(3000, () => {
@@ -65,8 +67,8 @@ function startedServer(isProduction) {
 const server = startedServer(IS_PRODUCTION);
 
 // =====================================   Инициализация вебсокет сервера   ============================================
-function initIO(isProduction) {
-    if (isProduction === true) {
+function initIO(IS_PRODUCTION) {
+    if (IS_PRODUCTION === 'true') {
         return new Server(server, {
             cors: {
                 origin: "https://bars-dusky.vercel.app",
@@ -74,7 +76,7 @@ function initIO(isProduction) {
             }
         });
     }
-    else if (isProduction === false) {
+    else if (IS_PRODUCTION === 'false') {
         return new Server(server, {
             cors: {
                 origin: "http://localhost:8080",
