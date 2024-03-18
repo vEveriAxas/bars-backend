@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 // Запуск postgres Сервера
 const sequelize = new Sequelize({
     dialect: 'postgres',
-    database: 'CHAT',
+    database: 'chat',
     host: 'localhost',
     port: 5432,
     username: 'root',
